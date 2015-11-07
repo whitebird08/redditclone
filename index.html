@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app="clone">
+
+<head>
+  <title>clone</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/yeti/bootstrap.min.css" rel="stylesheet" media="screen">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script> 
+  <script type="text/javascript"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Clone</a>
+    </div>
+
+    <button type="submit" class="btn btn-default"  ng-click="addPost=!addPost">Submit Posts</button>
+
+    <form class="navbar-form navbar-left" role="search">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search">
+      </div>
+      
+      <span class='sortBy'>Sort By</span>
+       <select>
+         <option>vote</option>
+         <option>date</option>
+         <option>title</option>
+       </select>
+    </form>
+     
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div id="formThing" class="container" ng-show="addPost">
+<div class="row row-centered">
+<div class="col-xs-10 col-centered"><div class="item"><div class="content">
+  <form >
+    <input>
+    <input>
+    <input>
+    <input>
+    <button ng-click=''></button>
+  </form>
+
+</div></div></div>
+</div>
+</div>
+
+<!-- ng-repeat='panel in panels | filter : search' -->
+<div id="panelThing" class="container"  >
+<div class="row row-centered">
+<!-- <div class="col-xs-2 "> -->
+<div class="col-xs-10 col-centered"><div class="item"><div class="content">data item</div></div></div>
+<!-- <div class="col-xs-2 "> -->
+
+</div>
+</div>
+
+
+
+
+
+
+</body>
+</html>
