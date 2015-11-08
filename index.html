@@ -18,7 +18,7 @@
       <a class="navbar-brand" href="#">Clone</a>
     </div>
 
-    <button type="submit" class="btn btn-default"  ng-click="addPost=!addPost">Submit Posts</button>
+    <button type="submit" class="btn btn-default"  ng-click="addPost=!addPost">Add A Post</button>
 
     <form class="navbar-form navbar-left" role="search">
       <div class="form-group">
@@ -39,28 +39,81 @@
 
 <div id="formThing" class="container" ng-show="addPost">
 <div class="row row-centered">
-<div class="col-xs-10 col-centered"><div class="item"><div class="content">
-  <form >
-    <input>
-    <input>
-    <input>
-    <input>
-    <button ng-click=''></button>
-  </form>
 
-</div></div></div>
-</div>
-</div>
+
+  
+<div class="col-xs-10 col-centered"><div class="item"><div class="content">
+<h2>Submit Post</h2>
+  <form>
+    <div class="form-group">
+      <input class="form-control" placeholder="Title">
+    </div>
+    <div class="form-group">
+      <input class="form-control" placeholder="Author">
+    </div>
+    <div class="form-group">
+      <input class="form-control" placeholder="Image URL">
+    </div>
+    <div class="form-group">
+      <input class="form-control" placeholder="Description">
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn primary">
+        Submit Post
+        <i class="glyphicon glyphicon-arrow-right"></i>
+      </button>
+    </div>
+  </form>
+ </div>
+</div></div></div></div>
 
 <!-- ng-repeat='panel in panels | filter : search' -->
-<div id="panelThing" class="container"  >
+<div id="panelThing" class="container" >
 <div class="row row-centered">
 <!-- <div class="col-xs-2 "> -->
-<div class="col-xs-10 col-centered"><div class="item"><div class="content">data item</div></div></div>
+<div class="col-xs-10 col-centered"><div class="item"><div class="content">data item</div>
+  <h2>Title:</h2>
+  <p class="titleData">1234</p>
+  <h3>Author:</h3>
+  <p class="authorData">1234</p>
+  <h3>Image URL:</h3>
+  <p class="imageData">1234</p>
+  <h3>Description:</h3>
+  <p class="descriptionData">1234</p>xx`x
+  
+<h4>timeStamp</h4><h4>comments</h4><h4>addComment</h4>
+
+
+</div></div>
 <!-- <div class="col-xs-2 "> -->
 
 </div>
 </div>
+          <div class="col-md-4">
+                    <!-- <h2>Intake Form</h2>
+                    <form>
+                      <div class="form-group">
+                        <input class="form-control" placeholder="License Plate">
+                      </div>
+                      <div class="form-group">
+                        <input class="form-control" placeholder="Owner's Name">
+                      </div>
+                      <div class="form-group">
+                        <select class="form-control">
+                          <option>Enter a Type</option>
+                          <option value="exterior">Exterior Only</option>
+                          <option value="interior-exterior">Interior / Exterior</option>
+                          <option value="deluxe">Deluxe</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <button type="submit" class="btn btn primary">
+                          Start Washing
+                          <i class="glyphicon glyphicon-arrow-right"></i>
+                        </button>
+                      </div>
+                    </form>
+                  </div> -->
 
 
 
