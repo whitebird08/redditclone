@@ -9,7 +9,7 @@
     <script type="text/javascript" src="app.js"></script> 
   <script type="text/javascript"></script>
 </head>
-<body>
+<body ng-controller='cloneController'>
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -22,7 +22,7 @@
 
     <form class="navbar-form navbar-left" role="search">
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search">
+        <input ng-model='search' type="text" class="form-control" placeholder="Search">
       </div>
       
       <span class='sortBy'>Sort By</span>
@@ -44,23 +44,23 @@
   
 <div class="col-xs-10 col-centered"><div class="item"><div class="content">
 <h2>Submit Post</h2>
-  <form>
+  <form name='form' novalidate>
     <div class="form-group">
-      <input class="form-control" placeholder="Title">
+      <input class="form-control" ng-model='panelTitle' placeholder="Title" required>
     </div>
     <div class="form-group">
-      <input class="form-control" placeholder="Author">
+      <input class="form-control" ng-model='panelAuthor' placeholder="Author" required>
     </div>
     <div class="form-group">
-      <input class="form-control" placeholder="Image URL">
+      <input class="form-control" ng-model='panelImage' placeholder="Image URL" required>
     </div>
     <div class="form-group">
-      <input class="form-control" placeholder="Description">
+      <input class="form-control" ng-model='panelDescription' placeholder="Description" required>
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn primary">
+      <button type="submit" class="btn btn primary" ng-click='panel(panelTitle, panelAuthor, panelImage, panelDescription)' ng-disabled='form.$invalid'>
         Submit Post
-        <i class="glyphicon glyphicon-arrow-right"></i>
+        <!-- <i class="glyphicon glyphicon-arrow-right"></i> -->
       </button>
     </div>
   </form>
@@ -68,57 +68,27 @@
 </div></div></div></div>
 
 <!-- ng-repeat='panel in panels | filter : search' -->
-<div id="panelThing" class="container" >
-<div class="row row-centered">
-<!-- <div class="col-xs-2 "> -->
-<div class="col-xs-10 col-centered"><div class="item"><div class="content">data item</div>
-  <h2>Title:</h2>
-  <p class="titleData">1234</p>
-  <h3>Author:</h3>
-  <p class="authorData">1234</p>
-  <h3>Image URL:</h3>
-  <p class="imageData">1234</p>
-  <h3>Description:</h3>
-  <p class="descriptionData">1234</p>xx`x
-  
-<h4>timeStamp</h4><h4>comments</h4><h4>addComment</h4>
+<div id="panelThing" class="container" 
+ 
+  <!-- <div class="col-xs-2 "> -->
+    <div class="col-xs-10 col-centered" ng-repeat='panel in panels | filter : search'><div class="item"><div class="content">
+      <h2>Title:</h2>
+      <p id="titleData">{{panel.panelTitle}}</p>
+      <h3>Author:</h3>
+      <p id="authorData">{{panel.panelAuthor}}</p>
+      <h3>Image URL:</h3>
+      <p id="imageData">{{panel.panelImage}}</p>
+      <h3>Description:</h3>
+      <p id="descriptionData">{{panel.panelDescription}}</p> 
+      <h4>timeStamp</h4><h4>comments</h4><h4>addComment</h4>
 
+    </div>
 
 </div></div>
-<!-- <div class="col-xs-2 "> -->
-
 </div>
 </div>
-          <div class="col-md-4">
-                    <!-- <h2>Intake Form</h2>
-                    <form>
-                      <div class="form-group">
-                        <input class="form-control" placeholder="License Plate">
-                      </div>
-                      <div class="form-group">
-                        <input class="form-control" placeholder="Owner's Name">
-                      </div>
-                      <div class="form-group">
-                        <select class="form-control">
-                          <option>Enter a Type</option>
-                          <option value="exterior">Exterior Only</option>
-                          <option value="interior-exterior">Interior / Exterior</option>
-                          <option value="deluxe">Deluxe</option>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <button type="submit" class="btn btn primary">
-                          Start Washing
-                          <i class="glyphicon glyphicon-arrow-right"></i>
-                        </button>
-                      </div>
-                    </form>
-                  </div> -->
-
-
-
-
-
+  </div>
+</div>
 
 </body>
 </html>

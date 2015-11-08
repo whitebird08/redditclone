@@ -1,8 +1,15 @@
 var cloneApp = angular.module('clone', [])
+
 cloneApp.controller('cloneController', function($scope){
   $scope.panels = [];
-
-  $scope.panel
+  $scope.panel = function(panelTitle, panelAuthor, panelImage, panelDescription){
+    var info = {};
+    info.panelTitle = panelTitle
+    info.panelAuthor = panelAuthor
+    info.panelImage = panelImage
+    info.panelDescription = panelDescription
+  $scope.panels.push(info)
+  }
 })
 
 //   $scope.contacts = [];    
