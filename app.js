@@ -8,19 +8,34 @@ cloneApp.controller('cloneController', function($scope){
     info.panelAuthor = panelAuthor
     info.panelImage = panelImage
     info.panelDescription = panelDescription
-  $scope.panels.push(info)
+    info.voteTotal = function(){}
+
+    info.date=Date.now()
+       
+    $scope.panels.push(info);
+
+    $scope.comments = [];
+
+    $scope.comment = function(myCommentAuthor, myCommentText){
+      var talk = {};
+      talk.myCommentAuthor= myCommentAuthor
+      talk.myCommentText= myCommentText
+      $scope.comments.push(talk);
+    }
   }
+
+  // $scope.sortBy = function(predicate) {
+  //   if(predicate === 'votes') {
+  //     $scope.selection = 'votes';
+  //   }
+  //   if(predicate === 'date') {
+  //     $scope.selection= 'date';
+  //   }
+  //   if(predicate === 'title') {
+  //     $scope.selection = 'title';
+  //   }
+  //   $scope.predicate = predicate;
+  // }
+
 })
-
-//   $scope.contacts = [];    
-
-
-//   $scope.contact = function(contactName, contactEmail, contactPhone){
-//     var empty = {};
-//     empty.contactName = contactName
-//     empty.contactEmail = contactEmail
-//     empty.contactPhone = contactPhone
-// console.log($scope.contacts, "before")
-//     $scope.contacts.push(empty) 
-//     console.log($scope.contacts, "after")
-//   }
+ 
