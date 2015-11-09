@@ -8,7 +8,7 @@ cloneApp.controller('cloneController', function($scope){
     info.panelAuthor = panelAuthor
     info.panelImage = panelImage
     info.panelDescription = panelDescription
-    info.voteTotal = function(){}
+    info.votes = 0;
 
     info.date=Date.now()
        
@@ -22,6 +22,16 @@ cloneApp.controller('cloneController', function($scope){
       talk.myCommentText= myCommentText
       $scope.comments.push(talk);
     }
+    $scope.addPost = false
+    $scope.c = false
+  }
+
+  $scope.addVote = function(panel){
+    panel.votes+=1
+
+  }
+  $scope.subtractVote = function(panel){
+    panel.votes-=1
   }
 
   // $scope.sortBy = function(predicate) {

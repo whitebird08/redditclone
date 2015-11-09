@@ -18,7 +18,9 @@
       <a class="navbar-brand" href="#">Clone</a>
     </div>
 
-    <button type="submit" class="btn btn-default"  ng-click="addPost=!addPost">Add A Post</button>
+    <button type="submit" class="btn btn-default"  ng-click="addPost=!addPost" ng-show='!addPost'>Add A Post</button>
+    <button type="submit" class="btn btn-default"  ng-click="addPost=!addPost" ng-show='addPost'>Hide Form</button>
+
 
     <form class="navbar-form navbar-left" role="search">
       <div class="form-group">
@@ -26,7 +28,7 @@
       </div>
   
       <span>Sort By</span>
-       <select ng-model='organizeBy' ng-init="organizeBy = 'title' ">
+       <select ng-model='organizeBy' ng-init="organizeBy = 'panelTitle' ">
          <option value='-votes'>votes</option>
          <option value='-date'>date</option>
          <option value='panelTitle'>title</option>
@@ -88,9 +90,9 @@
       <div class="item">
       <div class="content">
 
-        <i ng-click="votes = votes-1" class='glyphicon glyphicon-arrow-down btn'></i> 
-        <i ng-click="votes = votes+1" class='glyphicon glyphicon-arrow-up btn'></i> 
-        <span class='votes' ng-class='{positive: votes > 0, negative: votes < 0 }'>{{votes}}</span>
+        <i ng-click='subtractVote(panel)' class='glyphicon glyphicon-arrow-down btn'></i> 
+        <i ng-click='addVote(panel)' class='glyphicon glyphicon-arrow-up btn'></i> 
+        <span class='votes' ng-class='{positive: panel.votes > 0, negative: panel.votes < 0 }'>{{panel.votes}}</span>
 
        <!--  <h2>Title:</h2> -->
         <p id="titleData">TITLE: {{panel.panelTitle}}</p>
@@ -131,7 +133,8 @@
                           'other': 'comments'}">
     </ng-pluralize>
   </div>
-  <button ng-model='myComment' ng-click="showComments=!showComments; panel.commentCount+1 " >showComments</button>
+  <button ng-model='myComment' ng-click="showComments=!showComments; panel.commentCount+1 " >show Comments</button>
+  <button ng-model='myComment' ng-click="showComments=showComments; panel.commentCount+1 " >hide Comments</button>
   <div  class="col-xs-10 col-centered" ng-show='showComments' ng-repeat='comment in comments'>Comments: {{myCommentAuthor}} {{myCommentText}}
   </div>
 </div>
