@@ -17,3 +17,45 @@ span.positive {
 span.negative {
   color: red;
 }
+
+img {
+	height: 150px;
+	width:150px;
+	margin: 20px`x`x;
+}
+#titleData {
+	display: inline-block;
+}
+
+#voteData {
+	display: inline-block;
+}
+
+#authorData {
+}
+
+#submitComment {
+display: inline-block;
+}
+
+#showComments {
+display: inline-block;
+}
+
+#hideComments {
+display: inline-block;	
+}
+       /* <p id="titleData">TITLE: {{panel.panelTitle}}</p>
+        <i id="voteData ng-click='subtractVote(panel)' class='glyphicon glyphicon-arrow-down btn' ></i> 
+        <i id="voteData" ng-click='addVote(panel)' class='glyphicon glyphicon-arrow-up btn'></i> 
+        <span id="voteData" class='votes' ng-class='{positive: panel.votes > 0, negative: panel.votes < 0 }'>{{panel.votes}}</span>
+        <!-- <h3>Author:</h3> -->
+        <p id="authorData">AUTHOR: {{panel.panelAuthor}}</p>
+
+     
+        <!-- <h3>Image URL:</h3> -->
+        <!-- <p id="imageData">IMAGE: {{panel.panelImage}}</p> -->
+        <!-- <h3>Description:</h3> -->
+        <p id="descriptionData">DESCRIPTION: {{panel.panelDescription}}</p> 
+        <div ng-model='date'>{{panel.date | date: 'EEEE, MMMM d, y'}}</div>
+        <div ng-model='date'>{{panel.date | date: 'shortTime'}}</div>*/

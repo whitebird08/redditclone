@@ -35,21 +35,6 @@
        </select>
     </form>
 
-<!--     <h1>Camera Shop</h1>
-    <select ng-model="organizeBy" ng-init="organizeBy = '-price' ">
-    <option value='-rating'>Rating</option>
-    <option value='-price'>Price</option>
-    </select>
-    <div ng-repeat="item in data | orderBy: organizeBy">
-      <img ng-src="{{item.image}}">
-      <h1>{{item.title}}</h1>
-      <h2 ng-class="item.onSale===true ?'sale': 'offSale' ">{{item.price | currency}}
-        <span ng-show="item.onSale===true">ON SALE!!</span>
-      </h2>
-      <h3>{{item.rating}}</h3>
-    </div> -->
-
-
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
@@ -76,7 +61,6 @@
     <div class="form-group">
       <button type="submit" class="btn btn primary" ng-click='panel(panelTitle, panelAuthor, panelImage, panelDescription)' ng-disabled='form.$invalid'>
         Submit Post
-      </button>
     </div>
   </form>
  </div>
@@ -86,58 +70,75 @@
 <div id="panelThing" class="container" >
  
   <div class="row row-centered">
-    <div  class="col-xs-10 col-centered" ng-repeat='panel in panels | orderBy : organizeBy | filter : search'>
+    <div  class="col-xs-12 col-centered" ng-repeat='panel in panels | orderBy : organizeBy | filter : search'>
       <div class="item">
       <div class="content">
 
+    <div class='row'>
+        <div class='col-md-3'>
+          <img class=thumb ng-src="{{panel.panelImage}}">
+
+        </div>
+      
+      <div class="col-md-9">
+
+
+        <!--  <h2>Title:</h2> -->
+        <p id="titleData">TITLE: {{panel.panelTitle}}</p>
         <i ng-click='subtractVote(panel)' class='glyphicon glyphicon-arrow-down btn'></i> 
         <i ng-click='addVote(panel)' class='glyphicon glyphicon-arrow-up btn'></i> 
         <span class='votes' ng-class='{positive: panel.votes > 0, negative: panel.votes < 0 }'>{{panel.votes}}</span>
-
-       <!--  <h2>Title:</h2> -->
-        <p id="titleData">TITLE: {{panel.panelTitle}}</p>
         <!-- <h3>Author:</h3> -->
-        <p id="authorData">AUTHOR: {{panel.panelAuthor}}</p>
+        <p id="authorData" class='pull-right'>AUTHOR: {{panel.panelAuthor}}</p>
+
+     
         <!-- <h3>Image URL:</h3> -->
-        <p id="imageData">IMAGE: {{panel.panelImage}}</p>
+        <!-- <p id="imageData">IMAGE: {{panel.panelImage}}</p> -->
         <!-- <h3>Description:</h3> -->
         <p id="descriptionData">DESCRIPTION: {{panel.panelDescription}}</p> 
-        <div ng-model='date'>{{panel.date | date: 'EEEE, MMMM d, y'}}</div>
-        <div ng-model='date'>{{panel.date | date: 'shortTime'}}</div>
+        <div ng-model='date' class="glyphicon glyphicon-calendar">{{panel.date | date: 'EEEE, MMMM d, y'}}</div>
+        <!-- check out below for date format-->
+<!-- http://codepen.io/sevilayha/pen/razzdV?editors=101 -->
+
 
   
         
-        <button type="submit" class="btn btn-default"  ng-click="addComment=!addComment">Add Comment</button>
+        <button type="submit" class="btn btn-default"  ng-click="addComment=!addComment" ng-show='!addComment' >Add Comment</button>
+        <button type="submit" class="btn btn-default"  ng-click="addComment=!addComment" ng-show='addComment' >Hide Comment Form</button>
 <div id="formComment" class="container" ng-show="addComment">
 <div class="row row-centered">
         <h2>Add Comment Below</h2>
 
-  <form name='formComment' novalidate>
+  <form name='formComment' novalidate ng-show='addComment'>
     <div class="form-group">
-      <input class="form-control" ng-model='myCommentAuthor' placeholder="author" required>
+      <input class="form-control" ng-model='commentObj.myCommentAuthor' placeholder="author" required>
     </div>
-    <div class="form-group">
-      <input class="form-control" ng-model='myCommentText' placeholder="text" required>
+    <div class="form-group"> 
+      <input class="form-control" ng-model='commentObj.myCommentText' placeholder="text" required>
     </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn primary" ng-click='comment(myComment); commentCount=commentCount+1' ng-disabled='formComment.$invalid'>
+   <!--  <div class="form-group"> -->
+      <button id="submitComment"type="submit" class="btn btn primary" ng-click='addComment=!addComment; submitComment(); commentCount=commentCount+1' ng-disabled='formComment.$invalid' >
         Submit Comment
       </button>
-    </div>
+    <!-- </div> -->
   </form>     
 
   </div></div>
+  
+  <button id='showComments' ng-model='myComment' ng-click="showComments=!showComments; panel.commentCount+1 " ng-show='!showComments'>Show Comments</button>
+  <button id='hideComments' ng-model='myComment' ng-click="showComments=!showComments; panel.commentCount+1 " ng-show='showComments'>Hide Comments</button>
   <div>{{commentCount}}
     <ng-pluralize count="commentCount"
                   when="{ '1': 'comment', 
                           'other': 'comments'}">
     </ng-pluralize>
   </div>
-  <button ng-model='myComment' ng-click="showComments=!showComments; panel.commentCount+1 " >show Comments</button>
-  <button ng-model='myComment' ng-click="showComments=showComments; panel.commentCount+1 " >hide Comments</button>
-  <div  class="col-xs-10 col-centered" ng-show='showComments' ng-repeat='comment in comments'>Comments: {{myCommentAuthor}} {{myCommentText}}
+
+  <!-- <button ng-model='myComment' ng-click="showComments=showComments; panel.commentCount+1 " >hide Comments</button> -->
+  <div  class="col-xs-10 col-centered" ng-show='showComments' ng-repeat='comment in comments'>{{comment.myCommentAuthor}} says {{comment.myCommentText}}
   </div>
 </div>
+  </div>
   </div>
 </div>
 

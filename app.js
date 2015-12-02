@@ -2,6 +2,7 @@ var cloneApp = angular.module('clone', [])
 
 cloneApp.controller('cloneController', function($scope){
   $scope.panels = [];
+
   $scope.panel = function(panelTitle, panelAuthor, panelImage, panelDescription){
     var info = {};
     info.panelTitle = panelTitle
@@ -15,15 +16,21 @@ cloneApp.controller('cloneController', function($scope){
     $scope.panels.push(info);
 
     $scope.comments = [];
-
-    $scope.comment = function(myCommentAuthor, myCommentText){
-      var talk = {};
-      talk.myCommentAuthor= myCommentAuthor
-      talk.myCommentText= myCommentText
-      $scope.comments.push(talk);
+    $scope.submitComment = function(){
+      console.log($scope.comments)
+      $scope.comments.push(this.commentObj)
+      this.commentObj = {}
     }
+
+    // $scope.comment = function(myCommentAuthor, myCommentText){
+    //   var talk = {};
+    //   talk.myCommentAuthor= myCommentAuthor
+    //   talk.myCommentText= myCommentText
+    //   $scope.comments.push(talk);
+    // }
+
+
     $scope.addPost = false
-    $scope.c = false
   }
 
   $scope.addVote = function(panel){
@@ -33,19 +40,6 @@ cloneApp.controller('cloneController', function($scope){
   $scope.subtractVote = function(panel){
     panel.votes-=1
   }
-
-  // $scope.sortBy = function(predicate) {
-  //   if(predicate === 'votes') {
-  //     $scope.selection = 'votes';
-  //   }
-  //   if(predicate === 'date') {
-  //     $scope.selection= 'date';
-  //   }
-  //   if(predicate === 'title') {
-  //     $scope.selection = 'title';
-  //   }
-  //   $scope.predicate = predicate;
-  // }
 
 })
  
