@@ -15,6 +15,7 @@ cloneApp.controller('cloneController', function($scope){
 
     // angular.module('clone', ['angularMoment'])
     // .controller('mainController', function() {
+      $scope.displayDate = false
       var vm = this;
       vm.time = new Date();
     // });

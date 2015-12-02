@@ -100,9 +100,10 @@
         <!-- <p id="imageData">IMAGE: {{panel.panelImage}}</p> -->
         <!-- <h3>Description:</h3> -->
         <p id="descriptionData">DESCRIPTION: {{panel.panelDescription}}</p> 
-
-        <time title="{{ time | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}">{{ time | amCalendar }}</time>
-
+        <div ng-mouseover="displayDate=!displayDate">
+          <time ng-show="!displayDate">{{time | amCalendar }}</time>
+          <time ng-show="displayDate">{{time | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a'}}</time>
+        </div>
         <button type="submit" class="btn btn-default"  ng-click="addComment=!addComment" ng-show='!addComment' >Add Comment</button>
         <button type="submit" class="btn btn-default"  ng-click="addComment=!addComment" ng-show='addComment' >Hide Comment Form</button>
 <div id="formComment" class="container" ng-show="addComment">
