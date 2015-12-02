@@ -1,4 +1,4 @@
-var cloneApp = angular.module('clone', [])
+var cloneApp = angular.module('clone', ['angularMoment'])
 
 cloneApp.controller('cloneController', function($scope){
   $scope.panels = [];
@@ -11,7 +11,13 @@ cloneApp.controller('cloneController', function($scope){
     info.panelDescription = panelDescription
     info.votes = 0;
 
-    info.date=Date.now()
+    // info.date=Date.now()
+
+    // angular.module('clone', ['angularMoment'])
+    // .controller('mainController', function() {
+      var vm = this;
+      vm.time = new Date();
+    // });
        
     $scope.panels.push(info);
 
