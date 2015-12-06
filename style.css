@@ -1,13 +1,18 @@
 body { 
-  background: url(https://images.unsplash.com/photo-1422207109431-97544339f995?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=84829b9af541dc3a8bd8b8849895df5a);
+
+
+	/*https://pixabay.com/static/uploads/photo/2014/12/26/12/56/hawaii-580389_960_720.jpg*/
+  background: url(https://images.unsplash.com/photo-1444076095244-6edf09c44c27?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=d8f00c918ac1b13a592bdeb2557ef5dc);
   background-size: cover;
 }
 
 .item {
-  background-color: white;
-  padding: 25px;
-  margin: 25px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 15px;
+  margin: 15px;
   border: 1px solid white;
+  color: white;
+
 }
 
 span.positive {
@@ -21,10 +26,11 @@ span.negative {
 img {
 	height: 150px;
 	width:150px;
-	margin: 20px;
+	margin: 5px;
 }
 
 #titleData {
+	text-align: top;
 	display: inline-block;
 }
 
@@ -33,6 +39,8 @@ img {
 }
 
 #authorData {
+	display: inline-block;
+/*	padding: 15px;*/
 }
 
 #submitComment {
@@ -46,11 +54,22 @@ display: inline-block;
 #hideComments {
 display: inline-block;	
 }
-/*
+
 .clear {
-	color:red;
 	background: none;
+	color:white;
+	border:none;
+	padding:15px;
+}
+
+.clearBlack {
+	background: none;
+	color:white;
+	border:none;
+	padding:15px;
+	/*font-weight: bold;
 }*/
+
 
 
 

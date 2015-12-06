@@ -13,12 +13,11 @@ cloneApp.controller('cloneController', function($scope){
       votes: 0,
       date: Date.now(),
       comments: []
-    })
-      
-  }
-   
+    })   
   $scope.post = {};
   $scope.addPost = false  
+  }
+   
 
   $scope.addVote = function(panel){
     panel.votes+=1

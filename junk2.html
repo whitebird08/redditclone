@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html ng-app="redditClone">
+  <head>
+    <meta charset="UTF-8">
+    <title>reddit clone</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="./css/main.css"/>
+  </head>
+  <body ng-controller='redditController'>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-default navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Reddit Clone</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li data-toggle="modal" data-target="#myModal" ng-click='showPostForm()'><a href="#"><i class="fa fa-plus"></i> Submit Post</a></li>
+            <li>
+              <form class="navbar-form">
+                <input class="form-control" type="text" placeholder="Search..." ng-model='search'>
+              </form>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li ng-click="sort = '-voteCount'"><a href="#">Votes</a></li>
+                <li ng-click="sort = 'date'"><a href="#">Date</a></li>
+                <li ng-click="sort = 'title'"><a href="#">Title</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- ADD POST MODAL -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title text-center" id="myModalLabel">Add A Post</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group" ng-class="{ 'has-error' : newPost.title.$invalid && !newPost.title.$pristine }">
+                <label>Title</label>
+                <input type="text" name="title" class="form-control" ng-model="newPost.title" required autofocus>
+                <p ng-show="newPost.title.$invalid && !newPost.title.$pristine" class="help-block"> A title is required.</p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : newPost.author.$invalid && !newPost.author.$pristine }">
+                <label>Author</label>
+                <input type="text" name="author" class="form-control" ng-model="newPost.author" required>
+                <p ng-show="newPost.author.$invalid && !newPost.author.$pristine" class="help-block"> An author is required.</p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : newPost.image.$invalid && !newPost.image.$pristine }">
+                <label>Image</label>
+                <input type="text" name="image" class="form-control" ng-model="newPost.image" required>
+                <p ng-show="newPost.image.$invalid && !newPost.image.$pristine" class="help-block"> An image is required.</p>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : newPost.description.$invalid && !newPost.description.$pristine }">
+                <label>Description</label>
+                <input type="text" name="description" class="form-control" ng-model="newPost.description" required>
+                <p ng-show="newPost.description.$invalid && !newPost.description.$pristine" class="help-block"> A description is required.</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" ng-click='addPost()' data-dismiss="modal">Submit Post</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- DISPLAY POSTS -->
+    <div class='container'>
+      <div ng-repeat='post in posts | orderBy: sort | filter: search'>
+        <div class='row well'>
+          <div class='col-md-2'>
+            <img src="{{post.image}}">
+          </div>
+          <div class='col-md-10'>
+            <div class='row'>
+              <div class='col-md-6 text-left title'>
+                <h4><strong>{{post.title}} | 
+                  <span ng-click='upvote()'><i class="fa fa-arrow-up cursorPointer"></i></span>
+                  <span ng-click='downvote()'><i class="fa fa-arrow-down cursorPointer"></i></span>
+                  <span ng-class="{votePositive: post.voteCount > 0, voteNegative: post.voteCount < 0}">{{post.voteCount}}</span></strong></h4>
+              </div>
+              <div class='col-md-6 text-right author'>
+                <h4><span class='author'>By: {{post.author}} &nbsp;&nbsp;&nbsp;</span></h4>
+              </div>
+            </div>
+            <div class='row description'>{{post.description | characters:325}}</div>
+            <div class='row text-right'>
+              <span><i class="fa fa-calendar"></i> {{post.date | date:'medium'}}</span>
+              | 
+              <span class='cursorPointer' ng-click="showComments()"><i class="fa fa-comment"></i> 
+                <ng-pluralize count="post.comments.length"
+                  when="{'1': '{{post.comments.length}} comment',
+                         'other': '{{post.comments.length}} comments'}"></ng-pluralize></span> 
+              | 
+              <span class='cursorPointer' ng-click="showCommentForm()"><i class="fa fa-pencil"></i> Add Comment</span>
+            </div>
+            <!-- POST VIEW COMMENTS -->
+            <div class='row' name='viewComments' id='viewComments' ng-model='viewComments' ng-show="viewComments">
+              <br>
+              <div ng-repeat='comment in post.comments'>
+                <p><strong>{{comment.name}}</strong> - {{comment.text}}</p>
+              </div>
+            </div>
+            <!-- POST ADD COMMENT FORM -->
+            <div class='row' name='viewCommentForm' id='viewCommentForm' ng-model='viewCommentForm' ng-show="viewCommentForm">
+              <br>
+              <form name='newCommentForm' id='newCommentForm' ng-model='newCommentForm' ng-submit="addComment()">
+                <div>
+                  <h5>Name <input type='text' name='name' ng-model='newComment.name' placeholder='name'>
+                  Text <input type='text' name='text' ng-model='newComment.text' placeholder='text'>
+                  <input type='submit' value='Add Comment'></h5>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="./js/angularapp.js"></script>
+    <script src="./js/controllers.js"></script>
+    <script src="./js/truncate.js"></script>
+  </body>
+</html>
