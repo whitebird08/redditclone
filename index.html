@@ -93,12 +93,12 @@
 
                 <button id='showComments' class="clearBlack" ng-model='myComment' ng-click="showComments=!showComments; panel.commentCount+1 " ng-show='!showComments'><i class="glyphicon glyphicon-comment"></i> Show Comments</button>
                 <button id='hideComments' class="clearBlack" ng-model='myComment' ng-click="showComments=!showComments; panel.commentCount+1 " ng-show='showComments'>Hide Comments</button>
-                <div>{{commentCount}}
-                  <ng-pluralize count="commentCount"
-                            when="{ '1': 'comment', 
-                                    'other': 'comments'}">
+        
+                  <ng-pluralize count="panel.comments.length"
+                            when="{ '1': '{{panel.comments.length}} comment', 
+                                    'other':'{{panel.comments.length}} comments'}">
                   </ng-pluralize>
-                </div>
+            
 
                 <div class="col-xs-10 col-centered" ng-show='showComments' ng-repeat='comment in panel.comments'>{{comment.author}} says {{comment.text}}
 
