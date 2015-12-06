@@ -38,9 +38,9 @@
       <div class="col-xs-12 col-centered">
         <div class="item">
           <div class="content">
-            <h2>Submit Post</h2>
             <form name='form' novalidate>
               <div class="form-group">
+                <h3>Submit Post</h3>
                 <input class="form-control" ng-model='post.panelTitle' placeholder="Title" required>
               </div>
               <div class="form-group">
@@ -109,7 +109,7 @@
           </div>
 
           <div id="formComment" ng-show="addComment">
-            <h2>Add Comment Below</h2>
+            <h3>Add Comment Below</h3>
             <div class="row row-centered">
               <form name='formComment' novalidate ng-show='addComment'>
                 <div class="form-group">
@@ -118,8 +118,10 @@
                 <div class="form-group"> 
                   <input class="form-control" ng-model='newComment.text' placeholder="text" required>
                 </div>
-                <button id="submitComment"type="submit" class="btn btn primary" ng-click='addComment=!addComment; submitComment(); commentCount=commentCount+1' ng-disabled='formComment.$invalid' >
-                    Submit Comment</button>
+                <div class="form-group"> 
+                  <button id="submitComment"type="submit" class="btn btn primary" ng-click='addComment=!addComment; submitComment(); commentCount=commentCount+1' ng-disabled='formComment.$invalid' >
+                      Submit Comment</button>
+                </div>
               </form>     
 
             </div>
