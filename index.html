@@ -5,143 +5,150 @@
   <title>clone</title>
   <link rel="stylesheet" type="text/css" href="style.css">
   <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/yeti/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<body ng-controller='cloneController'>
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Clone</a>
+      </div>
+
+      <!-- <form class="navbar-form navbar-left" role="search"> -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li ng-click="sort = '-votes'"><a href="#">Votes</a></li>
+              <li ng-click="sort = 'date'"><a href="#">Date</a></li>
+              <li ng-click="sort = 'title'"><a href="#">Title</a></li>
+            </ul>
+          </li>
+        </ul>
+        <button type="submit" ng-click="addPost=!addPost" ng-show='!addPost'>Add A Post</button>
+        <button type="submit" ng-click="addPost=!addPost" ng-show='addPost'>Hide Form</button>
+      </div>
+
+    </div><!-- /.container-fluid -->
+  </nav>
+
+  <div id="formThing" class="container" ng-show="addPost">
+    <div class="row row-centered">
+
+      <div class="col-xs-12 col-centered">
+        <div class="item">
+          <div class="content">
+            <h2>Submit Post</h2>
+            <form name='form' novalidate>
+              <div class="form-group">
+                <input class="form-control" ng-model='post.panelTitle' placeholder="Title" required>
+              </div>
+              <div class="form-group">
+                <input class="form-control" ng-model='post.panelAuthor' placeholder="Author" required>
+              </div>
+              <div class="form-group">
+                <input class="form-control" ng-model='post.panelImage' placeholder="Image URL" required>
+              </div>
+              <div class="form-group">
+                <input class="form-control" ng-model='post.panelDescription' placeholder="Description" required>
+              </div>
+
+              <div class="form-group">
+                <button type="submit" class="" ng-click='panel(panelTitle, panelAuthor, panelImage, panelDescription)' ng-disabled='form.$invalid'>
+                  Submit Post
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="panelThing" class="container">
+   
+    <div class="row row-centered">
+      <!-- <div  class="col-xs-12 col-centered" ng-repeat='panel in panels | orderBy : organizeBy | filter : search'> -->
+      <div  class="col-xs-12 col-centered" ng-repeat='panel in panels | orderBy : sort | filter : search'>
+        <div class="item">
+          <div class="content">
+            <div class='row card'>
+              <div class='col-md-3'>
+                <img class=thumb ng-src="{{panel.panelImage}}">
+              </div>
+
+              <div class="col-md-9">
+
+                <p id="titleData">TITLE: {{panel.panelTitle}}</p>
+                <i ng-click='subtractVote(panel)' class='glyphicon glyphicon-arrow-down btn'></i> 
+                <i ng-click='addVote(panel)' class='glyphicon glyphicon-arrow-up btn'></i> 
+                <span class='votes' ng-class='{positive: panel.votes > 0, negative: panel.votes < 0 }'>{{panel.votes}}</span>
+
+                <p id="authorData" class='pull-right'>AUTHOR: {{panel.panelAuthor}}</p>
+
+                <p id="descriptionData">DESCRIPTION: {{panel.panelDescription}}</p> 
+
+                <span>{{panel.date | date:"medium" }}</span>
+                    
+                <button  type="submit" class="clear " ng-click="addComment=!addComment" ng-show='!addComment' >Add Comment</button>
+                <button  type="submit" class="clear " ng-click="addComment=!addComment" ng-show='addComment' >Hide Comment Form</button>
+
+
+                <button id='showComments' class="clear" ng-model='myComment' ng-click="showComments=!showComments; panel.commentCount+1 " ng-show='!showComments'>Show Comments</button>
+                <button id='hideComments' class="clear" ng-model='myComment' ng-click="showComments=!showComments; panel.commentCount+1 " ng-show='showComments'>Hide Comments</button>
+                <div>{{commentCount}}
+                  <ng-pluralize count="commentCount"
+                            when="{ '1': 'comment', 
+                                    'other': 'comments'}">
+                  </ng-pluralize>
+                </div>
+
+                <!-- <button ng-model='myComment' ng-click="showComments=showComments; panel.commentCount+1 " >hide Comments</button> -->
+                <div  class="col-xs-10 col-centered" ng-show='showComments' ng-repeat='comment in panel.comments'>{{comment.author}} says {{comment.text}}
+
+                </div>
+              </div>        
+
+              
+            </div>
+          </div>
+
+          <div id="formComment" ng-show="addComment">
+            <h2>Add Comment Below</h2>
+            <div class="row row-centered">
+            
+
+              <form name='formComment' novalidate ng-show='addComment'>
+                <div class="form-group">
+                  <input class="form-control" ng-model='newComment.author' placeholder="author" required>
+                </div>
+                <div class="form-group"> 
+                  <input class="form-control" ng-model='newComment.text' placeholder="text" required>
+                </div>
+               <!--  <div class="form-group"> -->
+                <button id="submitComment"type="submit" class="btn btn primary" ng-click='addComment=!addComment; submitComment(); commentCount=commentCount+1' ng-disabled='formComment.$invalid' >
+                    Submit Comment</button>
+              </form>     
+
+            </div>
+          </div>  
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-    <script type="text/javascript" src="app.js"></script> 
-  <script type="text/javascript"></script>
+  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <!-- load momentJS (required for angular-moment) -->
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
   <!-- load angular-moment -->
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>
-</head>
-<body ng-controller='cloneController'>
+  <script type="text/javascript" src="app.js"></script> 
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Clone</a>
-    </div>
-
-    <button type="submit" class="btn btn-default"  ng-click="addPost=!addPost" ng-show='!addPost'>Add A Post</button>
-    <button type="submit" class="btn btn-default"  ng-click="addPost=!addPost" ng-show='addPost'>Hide Form</button>
-
-
-    <form class="navbar-form navbar-left" role="search">
-      <div class="form-group">
-        <input ng-model='search' type="text" class="form-control" placeholder="Search">
-      </div>
-  
-      <span>Sort By</span>
-       <select ng-model='organizeBy' ng-init="organizeBy = 'panelTitle' ">
-         <option value='-votes'>votes</option>
-         <option value='-date'>date</option>
-         <option value='panelTitle'>title</option>
-       </select>
-    </form>
-
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
-<div id="formThing" class="container" ng-show="addPost">
-<div class="row row-centered">
-  
-<div class="col-xs-10 col-centered"><div class="item"><div class="content">
-<h2>Submit Post</h2>
-  <form name='form' novalidate>
-    <div class="form-group">
-      <input class="form-control" ng-model='panelTitle' placeholder="Title" required>
-    </div>
-    <div class="form-group">
-      <input class="form-control" ng-model='panelAuthor' placeholder="Author" required>
-    </div>
-    <div class="form-group">
-      <input class="form-control" ng-model='panelImage' placeholder="Image URL" required>
-    </div>
-    <div class="form-group">
-      <input class="form-control" ng-model='panelDescription' placeholder="Description" required>
-    </div>
-    <!-- <div ng-model='date'>{{date | date: 'EEEE, MMMM d, y'}}</div> -->
-    <div class="form-group">
-      <button type="submit" class="btn btn primary" ng-click='panel(panelTitle, panelAuthor, panelImage, panelDescription)' ng-disabled='form.$invalid'>
-        Submit Post
-    </div>
-  </form>
- </div>
-</div></div></div></div>
-
-
-<div id="panelThing" class="container" >
- 
-  <div class="row row-centered">
-    <div  class="col-xs-12 col-centered" ng-repeat='panel in panels | orderBy : organizeBy | filter : search'>
-      <div class="item">
-      <div class="content">
-
-    <div class='row'>
-        <div class='col-md-3'>
-          <img class=thumb ng-src="{{panel.panelImage}}">
-
-        </div>
-      
-      <div class="col-md-9">
-
-
-        <!--  <h2>Title:</h2> -->
-        <p id="titleData">TITLE: {{panel.panelTitle}}</p>
-        <i ng-click='subtractVote(panel)' class='glyphicon glyphicon-arrow-down btn'></i> 
-        <i ng-click='addVote(panel)' class='glyphicon glyphicon-arrow-up btn'></i> 
-        <span class='votes' ng-class='{positive: panel.votes > 0, negative: panel.votes < 0 }'>{{panel.votes}}</span>
-        <!-- <h3>Author:</h3> -->
-        <p id="authorData" class='pull-right'>AUTHOR: {{panel.panelAuthor}}</p>
-
-     
-        <!-- <h3>Image URL:</h3> -->
-        <!-- <p id="imageData">IMAGE: {{panel.panelImage}}</p> -->
-        <!-- <h3>Description:</h3> -->
-        <p id="descriptionData">DESCRIPTION: {{panel.panelDescription}}</p> 
-        <div ng-mouseover="displayDate=!displayDate">
-          <time ng-show="!displayDate">{{time | amCalendar }}</time>
-          <time ng-show="displayDate">{{time | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a'}}</time>
-        </div>
-        <button type="submit" class="btn btn-default"  ng-click="addComment=!addComment" ng-show='!addComment' >Add Comment</button>
-        <button type="submit" class="btn btn-default"  ng-click="addComment=!addComment" ng-show='addComment' >Hide Comment Form</button>
-<div id="formComment" class="container" ng-show="addComment">
-<div class="row row-centered">
-        <h2>Add Comment Below</h2>
-
-  <form name='formComment' novalidate ng-show='addComment'>
-    <div class="form-group">
-      <input class="form-control" ng-model='commentObj.myCommentAuthor' placeholder="author" required>
-    </div>
-    <div class="form-group"> 
-      <input class="form-control" ng-model='commentObj.myCommentText' placeholder="text" required>
-    </div>
-   <!--  <div class="form-group"> -->
-      <button id="submitComment"type="submit" class="btn btn primary" ng-click='addComment=!addComment; submitComment(); commentCount=commentCount+1' ng-disabled='formComment.$invalid' >
-        Submit Comment
-      </button>
-    <!-- </div> -->
-  </form>     
-
-  </div></div>
-  
-  <button id='showComments' ng-model='myComment' ng-click="showComments=!showComments; panel.commentCount+1 " ng-show='!showComments'>Show Comments</button>
-  <button id='hideComments' ng-model='myComment' ng-click="showComments=!showComments; panel.commentCount+1 " ng-show='showComments'>Hide Comments</button>
-  <div>{{commentCount}}
-    <ng-pluralize count="commentCount"
-                  when="{ '1': 'comment', 
-                          'other': 'comments'}">
-    </ng-pluralize>
-  </div>
-
-  <!-- <button ng-model='myComment' ng-click="showComments=showComments; panel.commentCount+1 " >hide Comments</button> -->
-  <div  class="col-xs-10 col-centered" ng-show='showComments' ng-repeat='comment in comments'>{{comment.myCommentAuthor}} says {{comment.myCommentText}}
-  </div>
-</div>
-  </div>
-  </div>
-</div>
 
 </body>
 </html>

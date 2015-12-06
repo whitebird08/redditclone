@@ -1,13 +1,13 @@
 body { 
-    background: url(https://images.unsplash.com/photo-1437422061949-f6efbde0a471?ixlib=rb-0.3.5&q=80&fm=jpg&w=1080&fit=max&s=f2883fcb8fd6a4e6ebd3c3b8a01345f5);
+  background: url(https://images.unsplash.com/photo-1422207109431-97544339f995?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=84829b9af541dc3a8bd8b8849895df5a);
   background-size: cover;
 }
 
 .item {
-  background-color: lightgrey;
-  opacity: 0.75;
+  background-color: white;
   padding: 25px;
   margin: 25px;
+  border: 1px solid white;
 }
 
 span.positive {
@@ -21,8 +21,9 @@ span.negative {
 img {
 	height: 150px;
 	width:150px;
-	margin: 20px`x`x;
+	margin: 20px;
 }
+
 #titleData {
 	display: inline-block;
 }
@@ -45,17 +46,11 @@ display: inline-block;
 #hideComments {
 display: inline-block;	
 }
-       /* <p id="titleData">TITLE: {{panel.panelTitle}}</p>
-        <i id="voteData ng-click='subtractVote(panel)' class='glyphicon glyphicon-arrow-down btn' ></i> 
-        <i id="voteData" ng-click='addVote(panel)' class='glyphicon glyphicon-arrow-up btn'></i> 
-        <span id="voteData" class='votes' ng-class='{positive: panel.votes > 0, negative: panel.votes < 0 }'>{{panel.votes}}</span>
-        <!-- <h3>Author:</h3> -->
-        <p id="authorData">AUTHOR: {{panel.panelAuthor}}</p>
+/*
+.clear {
+	color:red;
+	background: none;
+}*/
 
-     
-        <!-- <h3>Image URL:</h3> -->
-        <!-- <p id="imageData">IMAGE: {{panel.panelImage}}</p> -->
-        <!-- <h3>Description:</h3> -->
-        <p id="descriptionData">DESCRIPTION: {{panel.panelDescription}}</p> 
-        <div ng-model='date'>{{panel.date | date: 'EEEE, MMMM d, y'}}</div>
-        <div ng-model='date'>{{panel.date | date: 'shortTime'}}</div>*/
+
+
