@@ -1,10 +1,8 @@
 var cloneApp = angular.module('clone', ['angularMoment'])
 
 cloneApp.controller('cloneController', function($scope){
-
   $scope.panel = function(){
     $scope.panels.push({
-    
       panelTitle: $scope.post.panelTitle,
       panelAuthor: $scope.post.panelAuthor,
       panelImage: $scope.post.panelImage,
@@ -13,29 +11,22 @@ cloneApp.controller('cloneController', function($scope){
       date: Date.now(),
       comments: []
     })   
-  
     $scope.post = {};
     $scope.addPost = false  
   }
-   
-
   $scope.addVote = function(panel){
     panel.votes+=1
   }
   $scope.subtractVote = function(panel){
     panel.votes-=1
   }
-
   $scope.submitComment = function(){
-    console.log(this.newComment, '.....newcomment')
-    this.panel.comments.push({
-
+      this.panel.comments.push({
       author: this.newComment.author,
       text: this.newComment.text
     })
     this.newComment = {}
   }
-
   $scope.panels = [
       {
         panelTitle: 'Red White and Blue',
@@ -77,6 +68,5 @@ cloneApp.controller('cloneController', function($scope){
         comments:[{author: 'William Clark', text: 'Howdy partner!'}]
       }
     ];
-
 })
  

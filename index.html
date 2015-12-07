@@ -1,19 +1,16 @@
 <DOCTYPE html>
 <html ng-app="clone">
-
 <head>
   <title>clone</title>
   <link rel="stylesheet" type="text/css" href="style.css">
   <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/yeti/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body ng-controller='cloneController'>
-
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" href="#">Rocky Mountain High</a>
       </div>
-
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li class="dropdown">
@@ -28,13 +25,10 @@
         <button class="clear" type="submit" ng-click="addPost=!addPost" ng-show='!addPost'>Add A Post</button>
         <button class="clear" type="submit" ng-click="addPost=!addPost" ng-show='addPost'>Hide Form</button>
       </div>
-
     </div>
   </nav>
-
   <div id="formThing" class="container" ng-show="addPost">
     <div class="row row-centered">
-
       <div class="col-xs-12 col-centered">
         <div class="item">
           <div class="content">
@@ -63,9 +57,7 @@
       </div>
     </div>
   </div>
-
   <div id="panelThing" class="container">
-   
     <div class="row row-centered">
       <div  class="col-xs-12 col-centered" ng-repeat='panel in panels | orderBy : sort | filter : search'>
         <div class="item">
@@ -74,7 +66,6 @@
               <div class='col-md-3'>
                 <img class=thumb ng-src="{{panel.panelImage}}">
               </div>
-
               <div class="col-md-9">
                 <div class="row">
                   <div class="col-md-6">
@@ -104,17 +95,13 @@
                                         'other':'{{panel.comments.length}} comments'}">
                       </ng-pluralize></button>
                     <button id='hideComments' class="clearBlack" ng-model='myComment' ng-click="showComments=!showComments; panel.commentCount+1 " ng-show='showComments'>Hide Comments</button>
-            
                     <div class="col-xs-10 col-centered" ng-show='showComments' ng-repeat='comment in panel.comments'>{{comment.author}} says {{comment.text}}
-
                     </div>
                   </div>
                 </div>  
               </div>      
-              
             </div>
           </div>
-
           <div id="formComment" ng-show="addComment">
             <h3>Add Comment Below</h3>
             <div class="row row-centered">
@@ -130,26 +117,16 @@
                       Submit Comment</button>
                 </div>
               </form>     
-
             </div>
           </div>  
-
         </div>
       </div>
     </div>
   </div>
-
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-  <!-- load momentJS (required for angular-moment) -->
-  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-  <!-- load angular-moment -->
-  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>
   <script type="text/javascript" src="app.js"></script> 
-
-
 </body>
 </html>
 

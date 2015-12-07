@@ -1,23 +1,23 @@
 body { 
-  background: url(https://images.unsplash.com/photo-1444076095244-6edf09c44c27?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=d8f00c918ac1b13a592bdeb2557ef5dc);
-  background-size: 100vw;
-  background-attachment: fixed; 
+	background: url(https://images.unsplash.com/photo-1444076095244-6edf09c44c27?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=d8f00c918ac1b13a592bdeb2557ef5dc);
+	background-size: 100vw;
+	background-attachment: fixed; 
 }
 
 .item {
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 15px;
-  margin: 15px;
-  border: 1px solid white;
-  color: white;
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 15px;
+	margin: 15px;
+	border: 1px solid white;
+	color: white;
 }
 
 span.positive {
-  color:green;
+  	color:green;
 }
 
 span.negative {
-  color: red;
+  	color: red;
 }
 
 img {
@@ -40,11 +40,11 @@ img {
 }
 
 #submitComment {
-display: inline-block;
+	display: inline-block;
 }
 
 #hideComments {
-display: inline-block;	
+	display: inline-block;	
 }
 
 .clear {
