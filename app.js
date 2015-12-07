@@ -14,6 +14,7 @@ cloneApp.controller('cloneController', function($scope){
       date: Date.now(),
       comments: []
     })   
+  
   $scope.post = {};
   $scope.addPost = false  
   }

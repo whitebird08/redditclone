@@ -76,34 +76,41 @@
               </div>
 
               <div class="col-md-9">
-
-                <p id="titleData">TITLE: {{panel.panelTitle}}</p>
-                <i ng-click='subtractVote(panel)' class='glyphicon glyphicon-arrow-down btn'></i> 
-                <i ng-click='addVote(panel)' class='glyphicon glyphicon-arrow-up btn'></i> 
-                <span class='votes' ng-class='{positive: panel.votes > 0, negative: panel.votes < 0 }'>{{panel.votes}}</span>
-
-                <p id="authorData" class='pull-right'>AUTHOR: {{panel.panelAuthor}}</p>
-
-                <p id="descriptionData">DESCRIPTION: {{panel.panelDescription}}</p> 
-
-                <span><i class="glyphicon glyphicon-calendar"></i> {{panel.date | date:"medium" }}</span>
-                    
-                <button  type="submit" class="clearBlack " ng-click="addComment=!addComment" ng-show='!addComment' ><i class="glyphicon glyphicon-pencil"></i>Add Comment</button>
-                <button  type="submit" class="clearBlack " ng-click="addComment=!addComment" ng-show='addComment' >Hide Comment Form</button>
-
-                <button id='showComments' class="clearBlack" ng-model='myComment' ng-click="showComments=!showComments; panel.commentCount+1 " ng-show='!showComments'><i class="glyphicon glyphicon-comment"></i> Show Comments</button>
-                <button id='hideComments' class="clearBlack" ng-model='myComment' ng-click="showComments=!showComments; panel.commentCount+1 " ng-show='showComments'>Hide Comments</button>
-        
-                  <ng-pluralize count="panel.comments.length"
-                            when="{ '1': '{{panel.comments.length}} comment', 
-                                    'other':'{{panel.comments.length}} comments'}">
-                  </ng-pluralize>
-            
-
-                <div class="col-xs-10 col-centered" ng-show='showComments' ng-repeat='comment in panel.comments'>{{comment.author}} says {{comment.text}}
-
+                <div class="row">
+                  <div class="col-md-6">
+                    <p id="titleData"><strong>{{panel.panelTitle}}</strong></p>
+                    <i ng-click='subtractVote(panel)' class='glyphicon glyphicon-arrow-down btn'></i> 
+                    <i ng-click='addVote(panel)' class='glyphicon glyphicon-arrow-up btn'></i> 
+                    <span class='votes' ng-class='{positive: panel.votes > 0, negative: panel.votes < 0 }'>{{panel.votes}}</span>
+                  </div>
+                  <div class="col-md-6">
+                    <p id="authorData" class='pull-right'>By: {{panel.panelAuthor}}</p>
+                  </div>
                 </div>
-              </div>        
+                <div class="row">
+                  <div class="col-md-12">
+                    <p id="descriptionData">{{panel.panelDescription}}</p> 
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <span><i class="glyphicon glyphicon-calendar"></i> {{panel.date | date:"medium" }}</span>
+                      
+                    <button  type="submit" class="clearBlack " ng-click="addComment=!addComment" ng-show='!addComment' ><i class="glyphicon glyphicon-pencil"></i>Add Comment</button>
+                    <button  type="submit" class="clearBlack " ng-click="addComment=!addComment" ng-show='addComment' >Hide Comment Form</button>
+
+                    <button id='showComments' class="clearBlack" ng-model='myComment' ng-click="showComments=!showComments; panel.commentCount+1 " ng-show='!showComments'><i class="glyphicon glyphicon-comment"></i> <ng-pluralize count="panel.comments.length"
+                                when="{ '1': '{{panel.comments.length}} comment', 
+                                        'other':'{{panel.comments.length}} comments'}">
+                      </ng-pluralize></button>
+                    <button id='hideComments' class="clearBlack" ng-model='myComment' ng-click="showComments=!showComments; panel.commentCount+1 " ng-show='showComments'>Hide Comments</button>
+            
+                    <div class="col-xs-10 col-centered" ng-show='showComments' ng-repeat='comment in panel.comments'>{{comment.author}} says {{comment.text}}
+
+                    </div>
+                  </div>
+                </div>  
+              </div>      
               
             </div>
           </div>
