@@ -68,5 +68,6 @@ cloneApp.controller('cloneController', function($scope){
         comments:[{author: 'William Clark', text: 'Howdy partner!'}]
       }
     ];
+
 })
  
