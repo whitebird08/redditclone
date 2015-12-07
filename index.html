@@ -11,7 +11,7 @@
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">Clone</a>
+        <a class="navbar-brand" href="#">Rocky Mountain High</a>
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -21,7 +21,7 @@
             <ul class="dropdown-menu">
               <li ng-click="sort = '-votes'"><a href="#">Votes</a></li>
               <li ng-click="sort = 'date'"><a href="#">Date</a></li>
-              <li ng-click="sort = 'title'"><a href="#">Title</a></li>
+              <li ng-click="sort = 'panelTitle'"><a href="#">Title</a></li>
             </ul>
           </li>
         </ul>
@@ -54,7 +54,7 @@
               </div>
 
               <div class="form-group">
-                <button type="submit" class="" ng-click='panel(panelTitle, panelAuthor, panelImage, panelDescription)' ng-disabled='form.$invalid'>
+                <button type="submit" class="btn" ng-click='panel(panelTitle, panelAuthor, panelImage, panelDescription)' ng-disabled='form.$invalid'>
                   Submit Post
               </div>
             </form>
